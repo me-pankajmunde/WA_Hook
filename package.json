@@ -1,0 +1,14 @@
+{
+  "name": "wa-hook",
+  "version": "1.0.0",
+  "description": " Hello World on Render",
+  "main": "app.js",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+        "express": "^5.0.0"
+    }
+}
