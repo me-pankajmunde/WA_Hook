@@ -8,6 +8,11 @@ const { connectDB } = require('./config/database');
 // Import routes
 const webhookRoutes = require('./routes/webhook');
 const healthRoutes = require('./routes/health');
+const authRoutes = require('./routes/auth');
+const sessionRoutes = require('./routes/sessions');
+
+// Import middleware
+const { webhookLimiter, apiLimiter } = require('./middleware/rateLimiter');
 
 // Initialize Express app
 const app = express();
@@ -33,8 +38,10 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/webhook', webhookRoutes);
-app.use('/api', healthRoutes);
+app.use('/webhook', webhookLimiter, webhookRoutes);
+app.use('/api', apiLimiter, healthRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/sessions', sessionRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {

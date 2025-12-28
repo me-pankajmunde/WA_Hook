@@ -107,13 +107,19 @@ class WebhookController {
 
       // Download and save media if present
       if (mediaId) {
-        await mediaService.downloadAndSave(
+        const media = await mediaService.downloadAndSave(
           mediaId, 
           savedMessage.id, 
           user.id, 
           session.id, 
           messageType
         );
+        
+        // Queue media processing job for OCR and classification
+        if (messageType === 'image') {
+          const queueService = require('../services/queueService');
+          await queueService.addMediaProcessingJob(media.id);
+        }
       }
 
       // Mark message as read
