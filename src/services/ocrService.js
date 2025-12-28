@@ -1,5 +1,6 @@
 const axios = require('axios');
 const config = require('../config');
+const { OCR_CONFIG, AI_PROMPTS, IMAGE_CATEGORIES } = require('../config/constants');
 const logger = require('../utils/logger');
 const { Media } = require('../models');
 
@@ -18,9 +19,9 @@ class OCRService {
       const formData = new FormData();
       formData.append('file', fs.createReadStream(imagePath));
       formData.append('apikey', this.apiKey);
-      formData.append('language', 'eng');
-      formData.append('isOverlayRequired', 'false');
-      formData.append('detectOrientation', 'true');
+      formData.append('language', OCR_CONFIG.language);
+      formData.append('isOverlayRequired', OCR_CONFIG.isOverlayRequired);
+      formData.append('detectOrientation', OCR_CONFIG.detectOrientation);
 
       const response = await axios.post(this.apiUrl, formData, {
         headers: formData.getHeaders()
@@ -60,7 +61,7 @@ class OCRService {
       
       const extractedText = await aiService.analyzeImage(
         base64Image,
-        'Extract all text from this image. If there is no text, describe what you see.'
+        AI_PROMPTS.textExtraction
       );
 
       logger.info('AI-based text extraction successful');
@@ -81,9 +82,7 @@ class OCRService {
       
       const classification = await aiService.analyzeImage(
         base64Image,
-        `Classify this image into one of these categories: error_screenshot, code_snippet, 
-        ui_design, diagram, note, document, other. 
-        Return only the category name.`
+        AI_PROMPTS.imageClassification
       );
 
       logger.info('Image classified', { classification });

@@ -27,7 +27,10 @@ class WhatsAppService {
       logger.info(`Message sent to ${to}`, { messageId: response.data.messages[0].id });
       return response.data;
     } catch (error) {
-      logger.error('Error sending WhatsApp message:', error);
+      logger.error('Error sending WhatsApp message:', {
+        message: error.message,
+        to
+      });
       throw error;
     }
   }
@@ -59,7 +62,11 @@ class WhatsAppService {
       logger.info(`${mediaType} message sent to ${to}`, { messageId: response.data.messages[0].id });
       return response.data;
     } catch (error) {
-      logger.error(`Error sending ${mediaType} message:`, error);
+      logger.error(`Error sending ${mediaType} message:`, {
+        message: error.message,
+        mediaType,
+        to
+      });
       throw error;
     }
   }

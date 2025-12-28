@@ -22,7 +22,7 @@ class GitHubService {
         },
         {
           headers: {
-            Authorization: `token ${this.token}`,
+            Authorization: `Bearer ${this.token}`,
             Accept: 'application/vnd.github.v3+json'
           }
         }
@@ -48,7 +48,7 @@ class GitHubService {
         },
         {
           headers: {
-            Authorization: `token ${this.token}`,
+            Authorization: `Bearer ${this.token}`,
             Accept: 'application/vnd.github.v3+json'
           }
         }
@@ -69,7 +69,7 @@ class GitHubService {
         `${this.apiUrl}/repos/${this.username}/${repoName}`,
         {
           headers: {
-            Authorization: `token ${this.token}`,
+            Authorization: `Bearer ${this.token}`,
             Accept: 'application/vnd.github.v3+json'
           }
         }
@@ -82,7 +82,7 @@ class GitHubService {
         `${this.apiUrl}/repos/${this.username}/${repoName}/git/refs/heads/${defaultBranch}`,
         {
           headers: {
-            Authorization: `token ${this.token}`,
+            Authorization: `Bearer ${this.token}`,
             Accept: 'application/vnd.github.v3+json'
           }
         }
@@ -101,7 +101,7 @@ class GitHubService {
             },
             {
               headers: {
-                Authorization: `token ${this.token}`,
+                Authorization: `Bearer ${this.token}`,
                 Accept: 'application/vnd.github.v3+json'
               }
             }
@@ -125,7 +125,7 @@ class GitHubService {
         },
         {
           headers: {
-            Authorization: `token ${this.token}`,
+            Authorization: `Bearer ${this.token}`,
             Accept: 'application/vnd.github.v3+json'
           }
         }
@@ -141,7 +141,7 @@ class GitHubService {
         },
         {
           headers: {
-            Authorization: `token ${this.token}`,
+            Authorization: `Bearer ${this.token}`,
             Accept: 'application/vnd.github.v3+json'
           }
         }
@@ -155,7 +155,7 @@ class GitHubService {
         },
         {
           headers: {
-            Authorization: `token ${this.token}`,
+            Authorization: `Bearer ${this.token}`,
             Accept: 'application/vnd.github.v3+json'
           }
         }

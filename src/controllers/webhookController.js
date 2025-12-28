@@ -2,6 +2,7 @@ const whatsappService = require('../services/whatsappService');
 const messageService = require('../services/messageService');
 const mediaService = require('../services/mediaService');
 const aiService = require('../services/aiService');
+const { AI_PROMPTS } = require('../config/constants');
 const logger = require('../utils/logger');
 
 class WebhookController {
@@ -156,15 +157,7 @@ class WebhookController {
       });
 
       // Generate response
-      const systemPrompt = `You are a helpful AI assistant integrated with WhatsApp. 
-You help users with various tasks including:
-- Answering questions
-- Analyzing screenshots and images
-- Helping with coding tasks
-- Providing summaries and insights
-- Assisting with productivity
-
-Be concise and friendly. Keep responses short and to the point for WhatsApp.`;
+      const systemPrompt = AI_PROMPTS.conversationalAssistant;
 
       const aiResponse = await aiService.generateResponse(context, systemPrompt);
 
