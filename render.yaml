@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: wa-hook
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Database
+      - key: DATABASE_URL
+        sync: false
+      # WhatsApp API
+      - key: VERIFY_TOKEN
+        sync: false
+      - key: WHATSAPP_TOKEN
+        sync: false
+      - key: PHONE_NUMBER_ID
+        sync: false
+      # OpenAI
+      - key: OPENAI_API_KEY
+        sync: false
+      # GitHub (optional)
+      - key: GITHUB_TOKEN
+        sync: false
+      # JWT Secret
+      - key: JWT_SECRET
+        sync: false
+      # Redis (optional)
+      - key: REDIS_URL
+        sync: false
